@@ -115,14 +115,6 @@ def smi_to_taut(smi, name, make_more=True):
         AllChem.EmbedMolecule(th, AllChem.ETKDG())
         w.write(th)
         fh.write(AllChem.MolToSmiles(th) + "\n")
-    mcs = rdFMCS.FindMCS(tautomers, atomCompare=rdFMCS.AtomCompare.CompareElements)
-    mcsp = Chem.MolFromSmarts(mcs.smartsString)
-    AllChem.EmbedMolecule(mcsp, useRandomCoords=True)
-    #print(Chem.MolToMolBlock(mcsp))
-    #print(mcsp)
-    #for t in tautomers:
-    #    AllChem.GenerateDepictionMatching2DStructure(t, mcsp)
-    #print(mcs.smartsString)
     img = Draw.MolsToGridImage(tautomers, molsPerRow=3, legends=None)
     save_image_and_label(img, smi, str(name) + ".png")
     return tautomers
